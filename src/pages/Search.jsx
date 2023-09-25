@@ -43,7 +43,7 @@ const Search = () => {
           type="text"
           className="from-control"
           name="name"
-          praceholder="Search"
+          placeholder="Search Menu"
           value={searchText}
           onChange={(event) => {
             setsearchText(event.target.value);
