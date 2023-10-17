@@ -5,25 +5,36 @@ import Restaurant from './pages/Restaurant';
 import Add from './pages/Add';
 import Search from './pages/Search';
 import Update from './pages/Update';
-
+import Signup from './pages/signup';
+import Login from './pages/Login';
+import Logout from './pages/logout';
+import Layout from "./components/Layout"
+import Profile from './pages/Profile';
+import ProtectedRoute from './pages/ProtectedRoute';
+import AdminRoute from './pages/AdminRoute';
 
 function App() {
   
 
   return (
     <BrowserRouter>
-    <NavBar />
-    <div className='App'>
+   
     <Routes>
-      <Route path='/' element={<Restaurant />}/>
-      <Route path='/add' element={<Add />}/>
-      <Route path='/search' element={<Search />}/>
-      <Route path='/Update/:restaurantId' element={<Update />}/>
+      <Route path="/" element={<Layout/>}>
+      <Route index element={<Restaurant />}/>
+      <Route path='add' element={<AdminRoute> <Add /> </AdminRoute> }/>
+      <Route path='search' element={<ProtectedRoute> <Search /> </ProtectedRoute> }/>
+      <Route path='Signup' element={<Signup />}/>
+      <Route path='Login' element={<Login />}/>
+      <Route path='Logout' element={<Logout />}/>
+      <Route path='Profile' element={<Profile />}/>
+      <Route path='Update/:restaurantId' element={<Update />}/>
+      </Route>
     </Routes>
-    </div>
+
     </BrowserRouter>
     
   );
 }
 
-export default App
+export default App;

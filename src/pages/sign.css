@@ -1,0 +1,32 @@
+.resized-image {
+    max-width: 300px; /* ปรับขนาดเป็นขนาดที่คุณต้องการ */
+    max-height: 200px; /* ปรับขนาดเป็นขนาดที่คุณต้องการ */
+    
+}
+
+.container-sm {
+    max-width: 400px; 
+}
+
+.form-label {
+    font-size: 16px; 
+    font-family: NotoSansThai-Regular;
+    font-weight: bold;
+}
+
+.form-control {
+    padding: 8px;
+    font-size: 14px; 
+    width: 100%;
+    font-family: NotoSansThai-Regular;
+}
+
+/* ดึง font google มา ใช้ */
+
+@font-face {
+    font-family: NotoSansThai-Regular;
+    src: url(../public/NotoSansThai-Regular.ttf);
+  }
+  .NotoSansThai-Regular{
+    font-family: NotoSansThai-Regular;
+  }

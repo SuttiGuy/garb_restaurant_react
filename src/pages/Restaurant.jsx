@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios, { Axios } from "axios";
 import Card from "../components/Card";
+import authHeader from "../services/auth.header";
 
 
 const URL = import.meta.env.VITE_BASE_URL;
@@ -12,6 +13,7 @@ const config = {
     username: USERNAME,
     password: PASSWORD,
   },
+  headers:authHeader(),
 };
 
 const Restaurant = () => {
