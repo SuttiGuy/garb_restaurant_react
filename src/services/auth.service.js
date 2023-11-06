@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const URL = import.meta.env.VITE_BASE_URL;
 const API_URL = URL+ "/api/auth/";
 const USERNAME = import.meta.env.VITE_BASE_USERNAME;
@@ -21,8 +20,9 @@ const login = async (username, password) =>{
         //sign im successfully
         localStorage.setItem("user",JSON.stringify(response.data));
         localStorage.setItem("token", JSON.stringify(response.data.accessToken));
+
     }
-    return response;
+    return response.data;
 };
 
 const register = async (username,email,password) => {

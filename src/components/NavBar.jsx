@@ -6,6 +6,7 @@ import { useAuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
   const { user, logout } = useAuthContext();
+  //console.log(user.username);
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
@@ -36,9 +37,15 @@ const Navbar = () => {
               </Link>
             </li>
 
-            {user &&  (
-              <Link className="nav-link" to="/add">
-                เพิ่มเมนูอาหาร
+            {user && user.roles.includes("ROLES_ADMIN") && (
+              <Link className="nav-link" to="/Add">
+                AddMenu
+              </Link>
+            )}
+
+            {user && (
+              <Link className="nav-link" to="/Profile">
+                ProFile
               </Link>
             )}
 

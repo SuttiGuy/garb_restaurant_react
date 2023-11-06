@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import axios, { Axios } from "axios";
 import Card from "../components/Card";
 import authHeader from "../services/auth.header";
-
+import Loading from "../components/loading";
+import * as loadingData from "../loading/restaurant.json"
+import Swal from 'sweetalert2'
 
 const URL = import.meta.env.VITE_BASE_URL;
 const USERNAME = import.meta.env.VITE_BASE_USERNAME;
@@ -18,17 +20,42 @@ const config = {
 
 const Restaurant = () => {
   const [restaurants, setRestaurants] = useState([]);
+  const [loading, setloading] = useState(false);
+
   useEffect(() => {
     const fetchAllRestaurants = async () => {
       try {
         const res = await axios.get(`${URL}/restaurant`, config);
         setRestaurants(res.data);
-      } catch (error) {}
+        setloading(false)
+      } catch (error) {
+
+      }
     };
+    setloading(true)
     fetchAllRestaurants();
   }, []);
 
+
    const handleDelect = async (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    })
+
     try {
         await axios.delete(`${URL}/restaurant/${id}` , config);
         window.location.reload()
@@ -39,9 +66,11 @@ const Restaurant = () => {
 
   return (
     <div>
+  
       <h1>Restaurant</h1>
       <div className="row">
-        <div className="restaurants">
+        {
+          !loading ? ( <div className="restaurants">
           {restaurants.map((restaurant) => {
             return (
                 <Card restaurant={restaurant}
@@ -50,7 +79,9 @@ const Restaurant = () => {
                  />
             );
           })};
-        </div>
+        </div>) : (<Loading animation={loadingData}/>)
+        }
+       
       </div>
     </div>
   );

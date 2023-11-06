@@ -12,6 +12,7 @@ import Layout from "./components/Layout"
 import Profile from './pages/Profile';
 import ProtectedRoute from './pages/ProtectedRoute';
 import AdminRoute from './pages/AdminRoute';
+import Notallow from './pages/NotAllow'
 
 function App() {
   
@@ -27,8 +28,10 @@ function App() {
       <Route path='Signup' element={<Signup />}/>
       <Route path='Login' element={<Login />}/>
       <Route path='Logout' element={<Logout />}/>
-      <Route path='Profile' element={<Profile />}/>
+      <Route path='Profile' element={<ProtectedRoute> <Profile /> </ProtectedRoute> }/>
+    
       <Route path='Update/:restaurantId' element={<Update />}/>
+      <Route path='notallow' elment={<Notallow />} />
       </Route>
     </Routes>
 
