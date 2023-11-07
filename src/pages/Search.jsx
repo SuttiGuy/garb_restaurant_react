@@ -1,19 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios, { Axios } from "axios";
+import axios from  "../services/api";
 import Card from "../components/Card";
-import authHeader from "../services/auth.header";
+// import authHeader from "../services/auth.header";
+import Loading from "../components/loading";
+import * as loadingData from "../loading/restaurant.json"
+import Swal from 'sweetalert2'
 
-const URL = import.meta.env.VITE_BASE_URL;
-const USERNAME = import.meta.env.VITE_BASE_USERNAME;
-const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
-const config = {
-  auth: {
-    username: USERNAME,
-    password: PASSWORD,
-  },
-  headers:authHeader(),
-};
 
 const Search = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -21,7 +14,7 @@ const Search = () => {
   useEffect(() => {
     const fetchAllRestaurants = async () => {
       try {
-        const res = await axios.get(`${URL}/restaurant`, config);
+        const res = await axios.get(`/restaurant`);
         setRestaurants(res.data);
       } catch (error) {}
     };
@@ -29,13 +22,34 @@ const Search = () => {
   }, []);
 
   const handleDelect = async (id) => {
+   
+
     try {
-      await axios.delete(`${URL}/restaurant/${id}`, config);
-      window.location.reload();
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
+
+        await axios.delete(`/restaurant/${id}` );
+        window.location.reload()
     } catch (error) {
-      console.error(error);
+        console.error(error);
     }
-  };
+   }
 
   return (
     <div>

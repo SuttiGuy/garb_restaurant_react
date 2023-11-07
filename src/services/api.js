@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = import.meta.env.BASE_URL;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const USERNAME = import.meta.env.VITE_BASE_USERNAME;
 const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
 import TokenService from "./token.service";
@@ -14,6 +14,7 @@ const instance = axios.create({
     password: PASSWORD,
   },
 });
+
 console.log(BASE_URL);
 
 //Add Interceptor to request object

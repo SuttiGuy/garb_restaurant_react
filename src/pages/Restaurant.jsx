@@ -1,22 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios, { Axios } from "axios";
+import axios from "../services/api";
 import Card from "../components/Card";
-import authHeader from "../services/auth.header";
+// import authHeader from "../services/auth.header";
 import Loading from "../components/loading";
 import * as loadingData from "../loading/restaurant.json"
 import Swal from 'sweetalert2'
-
-const URL = import.meta.env.VITE_BASE_URL;
-const USERNAME = import.meta.env.VITE_BASE_USERNAME;
-const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
-const config = {
-  auth: {
-    username: USERNAME,
-    password: PASSWORD,
-  },
-  headers:authHeader(),
-};
 
 const Restaurant = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -25,7 +14,7 @@ const Restaurant = () => {
   useEffect(() => {
     const fetchAllRestaurants = async () => {
       try {
-        const res = await axios.get(`${URL}/restaurant`, config);
+        const res = await axios.get(`/restaurant`);
         setRestaurants(res.data);
         setloading(false)
       } catch (error) {
@@ -60,7 +49,7 @@ const Restaurant = () => {
         }
       })
 
-        await axios.delete(`${URL}/restaurant/${id}` , config);
+        await axios.delete(`/restaurant/${id}` );
         window.location.reload()
     } catch (error) {
         console.error(error);

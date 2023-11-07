@@ -1,16 +1,9 @@
 import React, {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-const URL = import.meta.env.VITE_BASE_URL;
-const USERNAME = import.meta.env.VITE_BASE_USERNAME;
-const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
-const config = {
-  auth: {
-    username: USERNAME,
-    password: PASSWORD,
-  },
-};
+import axios from  "../services/api";
+import Loading from "../components/loading";
+import * as loadingData from "../loading/restaurant.json"
+import Swal from 'sweetalert2'
 
 const Add = () => {
   const[restaurant, setRestaurants] = useState({
@@ -28,7 +21,7 @@ const Add = () => {
   const handleClick = async(e) => {
   e.preventDefault();
   try {
-    await axios.post(`${URL}/restaurant`, restaurant,config);
+    await axios.post(`/restaurant`, restaurant);
     navigate("/");
   } catch (error) {
     console.error(error);
