@@ -31,7 +31,7 @@ const Login = () => {
             //currentUser
             const currentUser = await AuthService.login(user.username, user.password);
             login(currentUser);
-            navigate('/');
+            navigate('/Profile');
             console.log('เข้าสู่ระบบสำเร็จ:');
             setLoginSuccess(true);
         } catch (error) {
