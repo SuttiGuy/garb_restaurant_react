@@ -1,9 +1,7 @@
 import React, {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from  "../services/api";
-import Loading from "../components/loading";
-import * as loadingData from "../loading/restaurant.json"
-import Swal from 'sweetalert2'
+
 
 const Add = () => {
   const[restaurant, setRestaurants] = useState({
@@ -13,6 +11,7 @@ const Add = () => {
   });
   const navigate = useNavigate();
   const [error, setError] = useState(false);
+  
 
   const handleChange = (e) => {
     setRestaurants((prev) => ({...prev, [e.target.name]:e.target.value}));
@@ -40,7 +39,7 @@ const Add = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container">      
       <h1>Grab Restaurant</h1>
       <div className="row form">
       <div className="col-6 justify-cintent-center">
@@ -81,8 +80,8 @@ const Add = () => {
           </form>
         </div>
       </div>
-      </div>
-    </div>
+      </div> 
+    </div> 
   )
 }
 

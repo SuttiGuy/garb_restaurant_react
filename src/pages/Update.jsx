@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "../services/api";
 // import authHeader from "../services/auth.header";
-import Loading from "../components/loading";
-import * as loadingData from "../loading/restaurant.json"
-import Swal from 'sweetalert2'
+
 
 const Update = () => {
   const [restaurant, setRestaurants] = useState({
