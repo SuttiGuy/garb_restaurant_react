@@ -42,6 +42,7 @@ const Add = () => {
   return (
     <div className="container">      
       <h1>Grab Restaurant</h1>
+      
       <div className="row form">
       <div className="col-6 justify-cintent-center">
         <h5 className='card-header'> Add New Restaurant</h5>

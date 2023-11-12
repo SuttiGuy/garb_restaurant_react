@@ -52,9 +52,11 @@ const Login = () => {
 
     return (
         <div>
-            <h2 className="text-center">LogIn</h2>
-            <form className="container-sm">
+             <h2 className="text-center">LogIn</h2>
             <div className="card_login">
+           
+            <form className="container-sm">
+            
                 <div className="mb-3">
                     <div className="mb-3">
                         <label htmlFor="username" className="form-label">
@@ -101,8 +103,9 @@ const Login = () => {
                         ยกเลิก
                     </button>
                 </div>
-                </div>
+                
             </form>
+            </div>
             </div>
       
     );
