@@ -1,43 +1,50 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-// import axios from 'axios';
+// import axios from  "../services/api";
 import { useNavigate } from 'react-router-dom';
 import './sign.css'; 
 import AuthService from '../services/auth.service';
 import { useAuthContext } from '../context/AuthContext';
 
+import Swal from 'sweetalert2';
+
 const Login = () => {
     const navigate = useNavigate();
-    // สร้าง state เพื่อเก็บข้อมูลผู้ใช้
+    const {login} = useAuthContext();  
     const [user, setUser] = useState({
         username: '',
         password: '',
     });
 
-    const {login} =useAuthContext() ;
-
-    const [loginSuccess, setLoginSuccess] = useState(false); // เพิ่ม state สำหรับการแจ้งเตือนเข้าสู่ระบบสำเร็จ
-    // ฟังก์ชันเมื่อข้อมูลผู้ใช้เปลี่ยนแปลง
-    const handleInputChange = (e) => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
         setUser({
             ...user,
             [name]: value,
         });
     };
-
-    const handleClick = async () => {
+    const handleLogin = async () => {
         try {
-            //currentUser
             const currentUser = await AuthService.login(user.username, user.password);
             login(currentUser);
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successfully !',
+                showConfirmButton: false,
+                timer: 1500, // 
+            });
+    
             navigate('/Profile');
-            console.log('เข้าสู่ระบบสำเร็จ:');
-            setLoginSuccess(true);
         } catch (error) {
-            console.error('เกิดข้อผิดพลาดในการเข้าสู่ระบบ:', error);
+            console.error('Login Failed:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Failed !',
+                text: error.message,
+            });
         }
     };
+    
 
     const handleCancel = () => {
         navigate('/');
@@ -45,13 +52,9 @@ const Login = () => {
 
     return (
         <div>
-            <h2 className="text-center">Sign In</h2>
-            {loginSuccess && ( // แสดงข้อความเมื่อเข้าสู่ระบบสำเร็จ
-                <div className="alert alert-success form-label" role="alert">
-                    เข้าสู่ระบบสำเร็จ!
-                </div>
-            )}
+            <h2 className="text-center">LogIn</h2>
             <form className="container-sm">
+            <div className="card_login">
                 <div className="mb-3">
                     <div className="mb-3">
                         <label htmlFor="username" className="form-label">
@@ -63,7 +66,7 @@ const Login = () => {
                             id="username"
                             name="username"
                             value={user.username}
-                            onChange={handleInputChange}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -77,7 +80,7 @@ const Login = () => {
                             id="password"
                             name="password"
                             value={user.password}
-                            onChange={handleInputChange}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -86,7 +89,7 @@ const Login = () => {
                     <button
                         type="button"
                         className="btn btn-success form-control"
-                        onClick={handleClick}
+                        onClick={handleLogin}
                     >
                         เข้าสู่ระบบ
                     </button>
@@ -98,8 +101,10 @@ const Login = () => {
                         ยกเลิก
                     </button>
                 </div>
+                </div>
             </form>
-        </div>
+            </div>
+      
     );
 };
 

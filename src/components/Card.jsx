@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import React from "react";
-import Update from "../pages/Update";
+// import Update from "../pages/Update";
 
 const Card = ({restaurant, handleDelete}) => {
     

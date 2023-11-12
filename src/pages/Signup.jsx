@@ -59,6 +59,7 @@ const Signup = () => {
           ลงทะเบียนสำเร็จ{" "}
         </div>
       )}
+       <div className="card_signup">
       <form className="container-sm">
         <div className="mb-3">
           <div className="mb-3">
@@ -112,7 +113,9 @@ const Signup = () => {
             className="btn btn-danger form-control"
             onClick={handleCancel}> ยกเลิก </button>
         </div>
+        
       </form>
+    </div>
     </div>
   );
 };

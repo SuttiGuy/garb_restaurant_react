@@ -5,7 +5,7 @@ import Restaurant from './pages/Restaurant';
 import Add from './pages/Add';
 import Search from './pages/Search';
 import Update from './pages/Update';
-import Signup from './pages/signup';
+import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Logout from './pages/logout';
 import Layout from "./components/Layout"
@@ -30,7 +30,7 @@ function App() {
       <Route path='Logout' element={<Logout />}/>
       <Route path='Profile' element={<ProtectedRoute> <Profile /> </ProtectedRoute> }/>
     
-      <Route path='Update/:restaurantId' element={<Update />}/>
+      <Route path='Update/:restaurantId' element={<ProtectedRoute> {<Update />} </ProtectedRoute> }/>
       <Route path='notallow' elment={<Notallow />} />
       </Route>
     </Routes>
